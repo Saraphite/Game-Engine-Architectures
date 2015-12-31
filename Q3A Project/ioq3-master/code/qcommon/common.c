@@ -31,6 +31,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <winsock.h>
 #endif
 
+#pragma once
+#include "../qcommon/altlog.h"
+
 int demo_protocols[] =
 { 67, 66, 0 };
 
@@ -166,7 +169,7 @@ void QDECL Com_Printf( const char *fmt, ... ) {
 	va_start (argptr,fmt);
 	Q_vsnprintf (msg, sizeof(msg), fmt, argptr);
 	va_end (argptr);
-
+	
 	if ( rd_buffer ) {
 		if ((strlen (msg) + strlen(rd_buffer)) > (rd_buffersize - 1)) {
 			rd_flush(rd_buffer);

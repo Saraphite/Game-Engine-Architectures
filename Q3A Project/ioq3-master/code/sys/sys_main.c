@@ -47,6 +47,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 
+/* Game Engine Architectures */
+#pragma once
+#include "../qcommon/altlog.h"
+
 static char binaryPath[ MAX_OSPATH ] = { 0 };
 static char installPath[ MAX_OSPATH ] = { 0 };
 
@@ -673,6 +677,20 @@ int main( int argc, char **argv )
 	NET_Init( );
 
 	CON_Init( );
+
+	/* Game Engine Architectures Testing la codey */
+	char superMessage[] = "Shit son! %s";
+	char hamMessage[] = "The gollywoggle is upon us!";
+	InitializeLogging();
+	SetLoggingType(Efficient);
+
+	FilterAllButSeverityTag(Important, All);
+	FilterAllButLogTag(Debug, File);
+	PrintLog(Important, Debug, true, superMessage, hamMessage);
+	PrintLog(Important, Warning, true, superMessage, "Chocolate Rain");
+	PrintLog(Trivial, Debug, true, superMessage, "Wouldn't it be lovely if this worked!?");
+	PrintLog(Important, Debug, true, "You should see this one son");
+	/* Game Engine Architectures End of Testing la codey*/
 
 	signal( SIGILL, Sys_SigHandler );
 	signal( SIGFPE, Sys_SigHandler );
